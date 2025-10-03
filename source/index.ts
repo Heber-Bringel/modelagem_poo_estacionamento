@@ -9,22 +9,20 @@ let carroB: Veiculo = new Veiculo("XYZ-5678", "Jeep Renegade", "Verde");
 
 alert("SISTEMA DE ESTACIONAMENTO - PRONTO PARA USO");
 
-// --- FLUXO 1: ENTRADA E SAÍDA IMEDIATA (Teste da cobrança mínima de 1h) ---
+// --- FLUXO 1: ENTRADA E SAÍDA ---
 
 // 1. Entrada do Carro A
 estacionamento.entrarVeiculo(carroA);
-alert(`ENTRADA: Carro ${carroA.placa} registrado.`);
+alert(`ENTRADA: Veículo ${carroA.modelo} de placa ${carroA.placa} registrado.`);
 
-// 2. Saída do Carro At
+// 2. Saída do Carro A
 estacionamento.sairVeiculo(carroA.placa);
 
-// --- FLUXO 2: ENTRADA E SAÍDA COM ESPERA (Teste de múltiplas horas) ---
+// --- FLUXO 2: ENTRADA E SAÍDA ---
 
 // 3. Entrada do Carro B
 estacionamento.entrarVeiculo(carroB);
-alert(`ENTRADA: Carro ${carroB.placa} registrado. Espere 60 segundos antes do próximo passo para testar a cobrança de 2h.`);
-
-// **NOTA:** Para testar a cobrança de 2 horas (R$ 10,00), você precisará esperar mais de 60 segundos na tela de alerta antes de clicar em OK no próximo passo.
+alert(`ENTRADA: Veículo ${carroB.modelo} de placa ${carroB.placa} registrado.`);
 
 // 4. Saída do Carro B
 estacionamento.sairVeiculo(carroB.placa);

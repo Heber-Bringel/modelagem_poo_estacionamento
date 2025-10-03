@@ -1,6 +1,6 @@
 import { Veiculo } from "./Veiculo";
 
-export class RegistroDeautomovel {
+export class RegistroDeAutomovel {
     veiculo: Veiculo;
     dataHoraEntrada: Date;
     dataHoraSaida: Date | null;
@@ -21,14 +21,14 @@ export class RegistroDeautomovel {
         this.dataHoraSaida = new Date();
 
         if (this.dataHoraEntrada && this.dataHoraSaida) {
-            let diferencaEmMilissegundos = this.dataHoraSaida.getTime() - this.dataHoraEntrada.getTime();
+            let diferencaEmMilissegundos: number = this.dataHoraSaida.getTime() - this.dataHoraEntrada.getTime();
 
             // guarda em horas (decimal)
             this.tempoDePermanencia = diferencaEmMilissegundos / (1000 * 60 * 60);
 
             // também guarda em formato legível (horas e minutos)
-            let horas = Math.floor(this.tempoDePermanencia);
-            let minutos = Math.floor((this.tempoDePermanencia - horas) * 60);
+            let horas: number = Math.floor(this.tempoDePermanencia);
+            let minutos: number = Math.floor((this.tempoDePermanencia - horas) * 60);
             this.tempoFormatado = `${horas} hora(s) e ${minutos} minuto(s)`;
         }
     }
@@ -41,6 +41,7 @@ export class RegistroDeautomovel {
         let horasCobradas: number = 0;
 
         if (this.tempoDePermanencia !== null) {
+            // arredonda pra cima caso hora seja quebrada. ex 1h 30, vai pagar por 2 h
             horasCobradas = Math.ceil(this.tempoDePermanencia);
 
             // debug no console

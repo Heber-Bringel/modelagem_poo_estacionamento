@@ -1,33 +1,31 @@
 import { Veiculo } from "./Veiculo";
-import { RegistroDeautomovel } from "./RegistroDeAutomovel";
+import { RegistroDeAutomovel } from "./RegistroDeAutomovel";
 
 export class Estacionamento {
-    registrosAbertos: Array<RegistroDeautomovel>;
+    registrosAbertos: Array<RegistroDeAutomovel>;
 
     constructor() {
         this.registrosAbertos = [];
     }
 
-    entrarVeiculo(veiculo: Veiculo): RegistroDeautomovel {
-        let novoRegistro = new RegistroDeautomovel(veiculo);
+    entrarVeiculo(veiculo: Veiculo): void {
+        let novoRegistro: RegistroDeAutomovel = new RegistroDeAutomovel(veiculo);
 
         this.registrosAbertos.push(novoRegistro);
-
-        return novoRegistro;
     }
 
     sairVeiculo(placa: string): void {
-        let index = this.registrosAbertos.findIndex(reg => reg.veiculo.placa === placa);
+        let index: number = this.registrosAbertos.findIndex(reg => reg.veiculo.placa === placa);
 
         if (index === -1) {
             return;
         }
 
-        let registroEncontrado: RegistroDeautomovel = this.registrosAbertos[index];
+        let registroEncontrado: RegistroDeAutomovel = this.registrosAbertos[index];
 
         let valorASerPago: number = registroEncontrado.calcularValor();
 
-        let dataEntrada = registroEncontrado.dataHoraEntrada.toLocaleString('pt-BR');
+        let dataEntrada: string = registroEncontrado.dataHoraEntrada.toLocaleString('pt-BR');
         let dataSaida: string;
         
         if (registroEncontrado.dataHoraSaida) {
@@ -36,19 +34,20 @@ export class Estacionamento {
             dataSaida = 'Tempo Não Registrado';
         }
 
-        const horasCobradas = valorASerPago / 5;
+        let horasCobradas: number = valorASerPago / 5;
 
         alert(`
-            Veículo de placa ${placa}
+            Veículo de placa: ${placa}
+            Modelo: ${registroEncontrado.veiculo.modelo}
             Entrou em: ${dataEntrada}
             Saiu em: ${dataSaida}
             ----------------------------
-            Tempo Cobrado: ${horasCobradas} horas
+            Tempo Cobrado: ${horasCobradas} hora(s)
+            Tempo Exato: ${registroEncontrado.tempoFormatado}
             Valor a Pagar: R$ ${valorASerPago.toFixed(2)}
         `);
 
         this.registrosAbertos.splice(index, 1);
-
 
     }
 
