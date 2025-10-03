@@ -6,6 +6,7 @@ export class RegistroDeautomovel {
     dataHoraSaida: Date | null;
     tempoDePermanencia: number | null;
     valorASerPago: number | null;
+    tempoFormatado: string | null;
 
     constructor(veiculo: Veiculo) {
         this.veiculo = veiculo;
@@ -13,6 +14,7 @@ export class RegistroDeautomovel {
         this.dataHoraSaida = null;
         this.tempoDePermanencia = null;
         this.valorASerPago = null;
+        this.tempoFormatado = null;
     }
 
     marcarTempoSaida(): void {
@@ -20,7 +22,14 @@ export class RegistroDeautomovel {
 
         if (this.dataHoraEntrada && this.dataHoraSaida) {
             let diferencaEmMilissegundos = this.dataHoraSaida.getTime() - this.dataHoraEntrada.getTime();
-            this.tempoDePermanencia = diferencaEmMilissegundos / 60000;
+
+            // guarda em horas (decimal)
+            this.tempoDePermanencia = diferencaEmMilissegundos / (1000 * 60 * 60);
+
+            // também guarda em formato legível (horas e minutos)
+            let horas = Math.floor(this.tempoDePermanencia);
+            let minutos = Math.floor((this.tempoDePermanencia - horas) * 60);
+            this.tempoFormatado = `${horas} hora(s) e ${minutos} minuto(s)`;
         }
     }
 
@@ -32,17 +41,19 @@ export class RegistroDeautomovel {
         let horasCobradas: number = 0;
 
         if (this.tempoDePermanencia !== null) {
-            let tempoEmHoras: number = this.tempoDePermanencia / 60;
-            horasCobradas = Math.ceil(tempoEmHoras);
+            horasCobradas = Math.ceil(this.tempoDePermanencia);
+
+            // debug no console
+            console.log("Tempo exato:", this.tempoFormatado);
+            console.log("Horas cobradas:", horasCobradas);
         }
 
         if (horasCobradas === 0) {
-            horasCobradas = 1;
+            horasCobradas = 1; // valor fixo por 1 hora
         }
 
         this.valorASerPago = horasCobradas * 5;
-
-        return this.valorASerPago || 0;
-
+        return this.valorASerPago;
     }
+
 }
