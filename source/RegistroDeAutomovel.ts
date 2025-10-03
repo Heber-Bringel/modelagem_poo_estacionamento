@@ -17,7 +17,7 @@ export class RegistroDeautomovel {
 
     marcarTempoSaida(): void {
         this.dataHoraSaida = new Date();
-        
+
         if (this.dataHoraEntrada && this.dataHoraSaida) {
             let diferencaEmMilissegundos = this.dataHoraSaida.getTime() - this.dataHoraEntrada.getTime();
             this.tempoDePermanencia = diferencaEmMilissegundos / 60000;
@@ -32,7 +32,7 @@ export class RegistroDeautomovel {
         let horasCobradas: number = 0;
 
         if (this.tempoDePermanencia !== null) {
-            let tempoEmHoras = this.tempoDePermanencia / 60;
+            let tempoEmHoras: number = this.tempoDePermanencia / 60;
             horasCobradas = Math.ceil(tempoEmHoras);
         }
 

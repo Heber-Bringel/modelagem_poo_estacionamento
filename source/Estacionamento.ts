@@ -23,9 +23,9 @@ export class Estacionamento {
             return;
         }
 
-        let registroEncontrado = this.registrosAbertos[index];
+        let registroEncontrado: RegistroDeautomovel = this.registrosAbertos[index];
 
-        let valorASerPago = registroEncontrado.calcularValor();
+        let valorASerPago: number = registroEncontrado.calcularValor();
 
         let dataEntrada = registroEncontrado.dataHoraEntrada.toLocaleString('pt-BR');
         let dataSaida: string;
