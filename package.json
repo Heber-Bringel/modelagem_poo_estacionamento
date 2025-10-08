@@ -2,10 +2,9 @@
   "name": "atividade-02-10",
   "version": "1.0.0",
   "description": "",
-  "source": "./source/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel"
+    "start": "parcel ./source/index.html"
   },
   "keywords": [],
   "author": "Héber Bringel",
